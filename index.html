@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sadece Senin İçin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -50,11 +50,17 @@
       transform: scale(1.05);
       background-color: #ffccd5;
     }
-    .footer {
-      margin-top: auto;
-      padding-top: 2rem;
-      font-size: 0.9rem;
-      color: #590d22;
+    @media (max-width: 480px) {
+      .menu {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+      .card {
+        font-size: 1rem;
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -66,6 +72,5 @@
     <div class="card" onclick="window.location.href='gece.html'">🌌 Geceleri Düşüncelerim</div>
     <div class="card" onclick="window.location.href='tatlilar.html'">🍩 Tatlılık Testi</div>
   </div>
-  <div class="footer">Tasarım & Kodlama: Reis 💻</div>
 </body>
 </html>
