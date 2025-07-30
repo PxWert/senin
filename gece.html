@@ -7,16 +7,22 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
-    body, html {
-      margin: 0; padding: 0; height: 100%;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      overflow: hidden;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Quicksand', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       color: #cfd8dc;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: relative;
+      min-height: 100vh;
     }
 
-    /* Küçük beyaz yıldızlar arka planı */
     body::before {
       content: "";
       position: fixed;
@@ -43,40 +49,35 @@
       50% {opacity: 0.7;}
     }
 
-    .moon {
-      position: absolute;
-      top: 10%;
-      right: 1%;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle at 30% 30%, #fdfcfb, #bbbbbb 70%);
-      border-radius: 50%;
-      box-shadow:
-        inset -15px -10px 20px #ddd,
-        inset 10px 10px 20px #999;
-      filter: drop-shadow(0 0 8px #fdfcfb);
-      z-index: 1;
-    }
+.moon {
+  position: absolute;
+  top: 10%;
+  right: 1%;
+  width: 150px;
+  height: 150px;
+background: linear-gradient(to left,white,rgb(141, 141, 0));
+  border-radius: 50%;
+  filter: drop-shadow(0 0 8px #fff9b1);
+  z-index: 1;
+}
 
-    /* Düşünceler kutusu - dikdörtgen arka plan kaldırıldı */
-    .thought-box {
-      position: relative;
-      top: 400px;
-      top: 25%;
-      left: 32%;
-      background: transparent; /* Arka plan kaldırıldı */
+
+
+
+    .container {
+      background: transparent;
       border-radius: 20px;
-      padding: 2rem 3rem;
+      padding: 2rem 2.5rem;
       max-width: 450px;
+      width: 90vw;
       text-align: center;
       box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-      font-size: 1.3rem;
-      min-height: 140px;
+      font-size: clamp(1rem, 1.3vw, 1.3rem);
       color: #e0e7f1;
       user-select: text;
       transition: opacity 0.5s ease;
+      backdrop-filter: blur(20px);
       z-index: 2;
-      backdrop-filter: blur(20px); /* Blur kaldırıldı */
     }
 
     button {
@@ -92,13 +93,29 @@
       transition: background-color 0.3s ease;
       user-select: none;
       z-index: 2;
-      position: relative;
-      position: absolute;
-      top: 50%;
-      left: 45%;
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      display: inline-block;
     }
+
     button:hover {
       background: #4834d4;
+    }
+
+    @media (max-width: 480px) {
+      .moon {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 1.5rem;
+      }
+      .container {
+        padding: 1.5rem 1.8rem;
+        width: 95vw;
+        font-size: 1rem;
+      }
+      button {
+        width: 100%;
+        padding: 1rem 0;
+      }
     }
   </style>
 </head>
@@ -109,14 +126,14 @@
 frameborder="0" allow="autoplay" allowfullscreen></iframe>
 </audio>
 
-  <div class="moon"></div>
+  <div class="moon" aria-label="Ay"></div>
 
-  <div class="thought-box" id="thoughtBox">“Gece, ruhun dans ettiği en güzel zamandır.”</div>
-  <button id="newThoughtBtn">Yeni Düşünce</button>
+  <div class="container" id="thoughtBox">“Gece, ruhun dans ettiği en güzel zamandır.”</div>
+  <button id="newThoughtBtn" aria-label="Yeni düşünce getir">Yeni Düşünce</button>
 
   <script>
     const thoughts = [
-       "“geceleri yıldızların yıldızı olarak sen varsın”",
+      "“Geceleri yıldızların yıldızı olarak sen varsın.”",
       "“Yıldızlar kadar parlak hayaller kur.”",
       "“Sessizlik bazen en derin kelimeleri fısıldar.”",
       "“Karanlık, ışığı daha anlamlı kılar.”",
