@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tatlılık Testi 🍬</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🍓 Tatlılık Testi 🍓</title>
   <style>
     * {
       margin: 0;
@@ -16,11 +16,13 @@
       background: linear-gradient(to bottom, #ffe6f0, #ffcce0);
       color: #fff;
       min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 2rem 1rem;
+      padding: 2rem 1rem 3rem;
     }
 
     h1 {
@@ -29,16 +31,46 @@
       margin-bottom: 1.5rem;
       text-align: center;
       animation: pulse 2s infinite;
+      z-index: 1;
     }
 
     .test-container {
       background: #fff0f5;
       color: #333;
       border-radius: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-      padding: 1.5rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      padding: 1.5rem 2rem;
+      width: 95%;
+      max-width: 420px;
+      z-index: 1;
+    }
+
+    .input-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #c71585;
+    }
+
+    .input-group input {
       width: 100%;
-      max-width: 400px;
+      padding: 10px 12px;
+      border: 2px solid #ff66a3;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #ff3385;
+      background: #ffe6f5;
     }
 
     .question {
@@ -47,22 +79,30 @@
 
     .question label {
       font-size: 1.1rem;
+      color: #a30a5e;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
-    .question input[type="range"] {
+    .question input[type='range'] {
       width: 100%;
+      cursor: pointer;
     }
 
     button {
       background: #ff66a3;
       color: #fff;
       border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
       border-radius: 12px;
       cursor: pointer;
       margin-top: 1rem;
+      width: 100%;
       transition: 0.3s;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(255, 102, 163, 0.6);
     }
 
     button:hover {
@@ -71,16 +111,70 @@
 
     .result {
       margin-top: 1.5rem;
-      font-size: 1.2rem;
+      background: #ffe6f2;
+      padding: 1.2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      font-size: 0.95rem;
       color: #ff3385;
-      text-align: center;
+      text-align: left;
       font-weight: bold;
       display: none;
+      white-space: pre-line;
+    }
+
+    .result span {
+      display: block;
+      margin-bottom: 0.5rem;
     }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.05); }
+    }
+
+    /* Kalp stilleri */
+    .heart {
+      position: absolute;
+      color: #ff66a3;
+      font-size: 20px;
+      opacity: 0.9;
+      animation: fall 4s linear forwards;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0.8;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      .input-group label, .question label {
+        font-size: 1rem;
+      }
+      .input-group input {
+        font-size: 1rem;
+        padding: 8px 10px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 0.9rem 1rem;
+      }
+      .result {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -89,25 +183,34 @@
   <h1>🍓 Tatlılık Testi 🍓</h1>
 
   <div class="test-container">
+    <div class="input-group">
+      <label for="firstName">İsim *</label>
+      <input type="text" id="firstName" placeholder="İsminizi giriniz hanımefendi"  />
+    </div>
+    <div class="input-group">
+      <label for="lastName">Soyad *</label>
+      <input type="text" id="lastName" placeholder="Soyadınızı giriniz hanımefendi"  />
+    </div>
+
     <div class="question">
-      <label>1. Gülüşün tatlı mı? 😁</label>
-      <input type="range" min="0" max="10" value="5" id="q1">
+      <label for="q1">1. Gülüşün tatlı mı? 😁</label>
+      <input type="range" min="0" max="10" value="5" id="q1" />
     </div>
     <div class="question">
-      <label>2. Biri üzülünce hemen moral vermeye çalışır mısın? 💖</label>
-      <input type="range" min="0" max="10" value="5" id="q2">
+      <label for="q2">2. Biri üzülünce hemen moral vermeye çalışır mısın? 💖</label>
+      <input type="range" min="0" max="10" value="5" id="q2" />
     </div>
     <div class="question">
-      <label>3. Ses tonun yumuşak mı? 🎵</label>
-      <input type="range" min="0" max="10" value="5" id="q3">
+      <label for="q3">3. Ses tonun yumuşak mı? 🎵</label>
+      <input type="range" min="0" max="10" value="5" id="q3" />
     </div>
     <div class="question">
-      <label>4. Gözlerin koca koca bakıyor mu? 👀</label>
-      <input type="range" min="0" max="10" value="5" id="q4">
+      <label for="q4">4. Gözlerin koca koca bakıyor mu? 👀</label>
+      <input type="range" min="0" max="10" value="5" id="q4" />
     </div>
     <div class="question">
-      <label>5. Sevdiğin kişilere sürpriz yapmayı sever misin? 🎁</label>
-      <input type="range" min="0" max="10" value="5" id="q5">
+      <label for="q5">5. Sevdiğin kişilere sürpriz yapmayı sever misin? 🎁</label>
+      <input type="range" min="0" max="10" value="5" id="q5" />
     </div>
 
     <button onclick="calculateSweetness()">Testi Bitir 🍬</button>
@@ -116,30 +219,67 @@
 
   <script>
     function calculateSweetness() {
-      const total = 
-        Number(document.getElementById('q1').value) +
-        Number(document.getElementById('q2').value) +
-        Number(document.getElementById('q3').value) +
-        Number(document.getElementById('q4').value) +
-        Number(document.getElementById('q5').value);
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
 
-      const score = Math.round((total / 50) * 100);
-      const result = document.getElementById('result');
-      let message = "";
-
-      if(score >= 90){
-        message = `Sen %${score} tatlısın! Şeker komasına sokarsın 🧁💕`;
-      } else if(score >= 70){
-        message = `Sen %${score} tatlısın! Tatlılık sende doğuştan 😇🍩`;
-      } else if(score >= 50){
-        message = `Sen %${score} tatlısın! Ama biraz daha şeker gerek 🧃`;
-      } else {
-        message = `Sen %${score} tatlısın! Ama merak etme, tuz da lazım hayata 😜`;
+      if (!firstName) {
+        alert('Lütfen isminizi giriniz.');
+        document.getElementById('firstName').focus();
+        return;
+      }
+      if (!lastName) {
+        alert('Lütfen soyadınızı giriniz.');
+        document.getElementById('lastName').focus();
+        return;
       }
 
-      result.textContent = message;
-      result.style.display = "block";
+      const q1 = Number(document.getElementById('q1').value);
+      const q2 = Number(document.getElementById('q2').value);
+      const q3 = Number(document.getElementById('q3').value);
+      const q4 = Number(document.getElementById('q4').value);
+      const q5 = Number(document.getElementById('q5').value);
+
+      const total = q1 + q2 + q3 + q4 + q5;
+      const score = Math.round((total / 50) * 100);
+
+      let yorum = '';
+      if (score >= 90) {
+        yorum = 'Şeker komasına sokarsın 🧁💕';
+      } else if (score >= 70) {
+        yorum = 'Tatlılık sende doğuştan 😇🍩';
+      } else if (score >= 50) {
+        yorum = 'Biraz daha şeker gerek 🧃';
+      } else {
+        yorum = 'Ama merak etme, tuz da lazım hayata 😜';
+      }
+
+      const result = document.getElementById('result');
+      result.innerHTML = `
+        <span>👤 <strong>Ad:</strong> ${firstName}</span>
+        <span>👤 <strong>Soyad:</strong> ${lastName}</span>
+        <span>🍭 <strong>Toplam Puan:</strong> ${total} / 50</span>
+        <span>🍬 <strong>Tatlılık Oranı:</strong> %${score}</span>
+        <span>📝 <strong>Yorum:</strong> ${yorum}</span>
+        <span style="color: green;">✅ <strong>Sonuç:</strong> Geçti</span>
+      `;
+      result.style.display = 'block';
     }
+
+    // Kalp oluşturma fonksiyonu
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.top = '-50px';
+      heart.style.fontSize = (Math.random() * 30 + 10) + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000); // 4 saniye sonra sil
+    }
+
+    // Sürekli kalp oluşturmak için
+    setInterval(createHeart, 300);
   </script>
 
 </body>
