@@ -13,24 +13,36 @@
     }
 
     body {
-      background: linear-gradient(to top right, #fce3ec, #ffe8e1);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      background: linear-gradient(90deg, #fce3ec, #ffb6c1, #ffe8e1, #ff91a4, #fce3ec);
+      background-size: 500% 500%;
+      animation: bgMove 30s ease infinite;
+      padding: 1rem; /* Mobilde kenar boşluğu için */
+    }
+
+    @keyframes bgMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .container {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(32, 78, 204, 0.3);
       position: relative;
-      width: 700px;
+      width: 90vw;
+      max-width: 700px;
       height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: pink;
       border-radius: 10px;
-
+      overflow: visible;
     }
 
     .cards-wrapper {
@@ -48,20 +60,46 @@
       width: 80%;
       max-width: 300px;
       height: 90%;
-      background: white;
       border-radius: 20px;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 30px;
       text-align: center;
       font-size: 1.4rem;
-      color: #444;
+      color: white;
       transition: transform 0.4s ease, opacity 0.4s ease;
       opacity: 0;
       transform: scale(0.9) translateX(0);
+      font-weight: 600;
+      user-select: none;
     }
+
+    /* Kart renkleri */
+    .card.color1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
+    .card.color2 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+    .card.color3 { background: linear-gradient(135deg, #f6d365, #fda085); }
+    .card.color4 { background: linear-gradient(135deg, #84fab0, #8fd3f4); }
+    .card.color5 { background: linear-gradient(135deg, #fccb90, #d57eeb); }
+    .card.color6 { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+    .card.color7 { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+    .card.color8 { background: linear-gradient(135deg, #fcb69f, #ffecd2); }
+    .card.color9 { background: linear-gradient(135deg, #a6c0fe, #f68084); }
+    .card.color10 { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .card.color11 { background: linear-gradient(135deg, #89f7fe, #66a6ff); }
+    .card.color12 { background: linear-gradient(135deg, #fbc7aa, #f7817b); }
+    .card.color13 { background: linear-gradient(135deg, #f7b733, #fc4a1a); }
+    .card.color14 { background: linear-gradient(135deg, #43cea2, #185a9d); }
+    .card.color15 { background: linear-gradient(135deg, #f7971e, #ffd200); }
+    .card.color16 { background: linear-gradient(135deg, #c33764, #1d2671); }
+    .card.color17 { background: linear-gradient(135deg, #f7971e, #ffd200); }
+    .card.color18 { background: linear-gradient(135deg, #ff5f6d, #ffc371); }
+    .card.color19 { background: linear-gradient(135deg, #0fd850, #f9f047); }
+    .card.color20 { background: linear-gradient(135deg, #aa4b6b, #6b6b83); }
+    .card.color21 { background: linear-gradient(135deg, #ff6a00, #ee0979); }
+    .card.color22 { background: linear-gradient(135deg, #7f00ff, #e100ff); }
+    .card.color23 { background: linear-gradient(135deg, #f7971e, #ffd200); }
 
     .card.active {
       opacity: 1;
@@ -96,10 +134,22 @@
       cursor: pointer;
       z-index: 10;
       transition: background 0.3s;
+      user-select: none;
     }
 
     .nav-btn:hover {
       background-color: #ff91a4;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff66a3;
+      font-size: 20px;
+      opacity: 0.9;
+      animation: fall 4s linear forwards;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
     }
 
     #prev {
@@ -110,9 +160,49 @@
       right: -25px;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 700px) {
+      .container {
+        height: 400px;
+      }
       .card {
+        max-width: 250px;
         font-size: 1.2rem;
+        padding: 20px;
+      }
+      .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      #prev {
+        left: -20px;
+      }
+      #next {
+        right: -20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        height: 350px;
+      }
+      .card {
+        max-width: 90vw;
+        width: 90vw;
+        height: 80%;
+        font-size: 1rem;
+        padding: 15px;
+      }
+      .nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      #prev {
+        left: -15px;
+      }
+      #next {
+        right: -15px;
       }
     }
   </style>
@@ -120,40 +210,40 @@
 <body>
 
   <div class="container">
-    <button id="prev" class="nav-btn">&#8249;</button>
+    <button id="prev" class="nav-btn" aria-label="Önceki">&#8249;</button>
 
     <div class="cards-wrapper" id="cardsWrapper">
-      <div class="card left">Gözlerin, içimde saklı kalmış en derin duyguları uyandırıyor.</div>
-      <div class="card left">Gülüşün, dünyadaki en güzel melodiden bile daha etkileyici.</div>
-      <div class="card left">Gülüşün, karanlık bir odayı aydınlatacak kadar güçlü!</div>
-      <div class="card active">Bugün çok güzelsin, içten gelen bir ışıltın var!</div>
-      <div class="card right">Senin gibi biriyle tanışmak bir ayrıcalık!</div>
-      <div class="card right">Sadece görünüşün değil, enerjin de etkileyici.</div>
-      <div class="card right">Seninle konuşmak, ruhuma dokunan en güzel şiir gibi</div>
-         <div class="card right">Sadece varlığın bile etrafındaki her şeyi güzelleştiriyor.</div>
-         <div class="card right">Her bakışın, kalbimde iz bırakan nadir bir sanat eseri gibi.</div>
-         <div class="card right">İnan bana, senin ışığın yanında diğer her ışık sönük kalır.</div>
-         <div class="card right">Seninle geçen her saniye, hayatımın en değerli anı oluyor.</div>
-         <div class="card right">Konuşurken bile kalbimi hızlandırıyorsun, farkında mısın?</div>
-         <div class="card right">Seninle olmak, en karanlık anlarda bile umut dolmak demek.</div>
-         <div class="card right">Sen sadece güzel değil, aynı zamanda akıllı ve büyüleyicisin.</div>
-         <div class="card right">Her gülüşün, bana özel bir sırrı fısıldıyor gibi.</div>
-         <div class="card right">Işığın o kadar parlak ki, gölgeler bile senden kaçıyor.</div>
-         <div class="card right">Seninle geçen zaman, hayatımın en değerli hediyesi.</div>
-         <div class="card right">O eşsiz enerjinle insanları büyülemekten hiç vazgeçme.</div>
-         <div class="card right">Gözlerinde kaybolmak, en güzel kaçamaklardan biri.</div>
-         <div class="card right">Dünyanın en güzel masal kahramanı sensin, farkında mısın?</div>
-         <div class="card right">Sesin, ruhuma dokunan en tatlı melodi gibi.</div>
-         <div class="card right">Güzelliğin, sadece dış görünüş değil; içindeki o ışıkla daha da parlıyor.</div>
-
+      <div class="card color1 left">Gözlerin, içimde saklı kalmış en derin duyguları uyandırıyor.</div>
+      <div class="card color2 left">Gülüşün, dünyadaki en güzel melodiden bile daha etkileyici.</div>
+      <div class="card color3 left">Gülüşün, karanlık bir odayı aydınlatacak kadar güçlü!</div>
+      <div class="card color4 active">Bugün çok güzelsin, içten gelen bir ışıltın var!</div>
+      <div class="card color5 right">Senin gibi biriyle tanışmak bir ayrıcalık!</div>
+      <div class="card color6 right">Sadece görünüşün değil, enerjin de etkileyici.</div>
+      <div class="card color7 right">Seninle konuşmak, ruhuma dokunan en güzel şiir gibi</div>
+      <div class="card color8 right">Sadece varlığın bile etrafındaki her şeyi güzelleştiriyor.</div>
+      <div class="card color9 right">Her bakışın, kalbimde iz bırakan nadir bir sanat eseri gibi.</div>
+      <div class="card color10 right">İnan bana, senin ışığın yanında diğer her ışık sönük kalır.</div>
+      <div class="card color11 right">Seninle geçen her saniye, hayatımın en değerli anı oluyor.</div>
+      <div class="card color12 right">Konuşurken bile kalbimi hızlandırıyorsun, farkında mısın?</div>
+      <div class="card color13 right">Seninle olmak, en karanlık anlarda bile umut dolmak demek.</div>
+      <div class="card color14 right">Sen sadece güzel değil, aynı zamanda akıllı ve büyüleyicisin.</div>
+      <div class="card color15 right">Her gülüşün, bana özel bir sırrı fısıldıyor gibi.</div>
+      <div class="card color16 right">Işığın o kadar parlak ki, gölgeler bile senden kaçıyor.</div>
+      <div class="card color17 right">Seninle geçen zaman, hayatımın en değerli hediyesi.</div>
+      <div class="card color18 right">O eşsiz enerjinle insanları büyülemekten hiç vazgeçme.</div>
+      <div class="card color19 right">Gözlerinde kaybolmak, en güzel kaçamaklardan biri.</div>
+      <div class="card color20 right">Dünyanın en güzel masal kahramanı sensin, farkında mısın?</div>
+      <div class="card color21 right">Sesin, ruhuma dokunan en tatlı melodi gibi.</div>
+      <div class="card color22 right">Güzelliğin, sadece dış görünüş değil; içindeki o ışıkla daha da parlıyor.</div>
+      <div class="card color23 right">Her anın özel, tıpkı senin gibi.</div>
     </div>
 
-    <button id="next" class="nav-btn">&#8250;</button>
+    <button id="next" class="nav-btn" aria-label="Sonraki">&#8250;</button>
   </div>
 
   <script>
     const cards = document.querySelectorAll('.card');
-    let current = 1;
+    let current = 3; // aktif kart 4. kart, index 3
 
     function updateCards() {
       cards.forEach((card, index) => {
@@ -185,6 +275,8 @@
     document.getElementById("next").addEventListener("click", nextCard);
     document.getElementById("prev").addEventListener("click", prevCard);
 
+    let startX = 0;
+
     document.querySelector('.cards-wrapper').addEventListener('touchstart', (e) => {
       startX = e.touches[0].clientX;
     });
@@ -196,6 +288,22 @@
     });
 
     updateCards();
+
+
+     // Kalp oluşturma fonksiyonu
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.top = '-50px';
+      heart.style.fontSize = (Math.random() * 30 + 10) + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    setInterval(createHeart, 300);
   </script>
 
 </body>
